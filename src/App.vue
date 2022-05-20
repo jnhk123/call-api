@@ -19,6 +19,7 @@ export default {
   methods : {
 
     callNaverAPI(){
+      // v1으로 시작하기 때문에 proxy를 탐 -> vue.config.js 확인
         axios.get("/v1/search/webkr.json", {
           headers : {
             "X-Naver-Client-Id" : "iEBjx5CGxoexKDe2WKgj",
