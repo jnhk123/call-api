@@ -1,17 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    검색어 : <input v-model="search">
+    <button @click="callNaverAPI">네이버 API 호출</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+
+  data : () => ({
+    search : ''
+  }),
+  
+  methods : {
+
+    callNaverAPI(){
+        axios.get("/v1/search/webkr.json", {
+          headers : {
+            "X-Naver-Client-Id" : "iEBjx5CGxoexKDe2WKgj",
+            "X-Naver-Client-Secret" : "yXMC7_XwqH"
+          },
+          params : {
+            query : this.search
+          }
+        }).then(response => {
+          console.log(response);
+        }).catch(error => {
+          console.error(error);
+        })
+    }
   }
 }
 </script>
